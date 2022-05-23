@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PhipeMC\\Documents\\Octavo Semestre\\PW III\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj": {}
+    "D:\\ITSUR\\8vo\\Web\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PhipeMC\\Documents\\Octavo Semestre\\PW III\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj": {
+    "D:\\ITSUR\\8vo\\Web\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PhipeMC\\Documents\\Octavo Semestre\\PW III\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj",
+        "projectUniqueName": "D:\\ITSUR\\8vo\\Web\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj",
         "projectName": "WebAPINwind",
-        "projectPath": "C:\\Users\\PhipeMC\\Documents\\Octavo Semestre\\PW III\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj",
-        "packagesPath": "C:\\Users\\PhipeMC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PhipeMC\\Documents\\Octavo Semestre\\PW III\\WebAPINwind\\WebAPINwind\\obj\\",
+        "projectPath": "D:\\ITSUR\\8vo\\Web\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj",
+        "packagesPath": "C:\\Users\\zaval\\.nuget\\packages\\",
+        "outputPath": "D:\\ITSUR\\8vo\\Web\\WebAPINwind\\WebAPINwind\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\PhipeMC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\zaval\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -42,27 +42,31 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[6.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.5, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.3, )"
+              "version": "[6.0.5, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -74,7 +78,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.3.0, )"
+              "version": "[6.3.1, )"
             }
           },
           "imports": [
@@ -95,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

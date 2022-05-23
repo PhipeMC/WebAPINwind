@@ -116,6 +116,7 @@ namespace WebAPINwind.Controllers
             return (_context.Movements?.Any(e => e.MovementId == id)).GetValueOrDefault();
         }
 
+        // GET: api/
         [HttpGet]
         [Route("comportamientoproducto")]
         public IEnumerable<Object> comportamientoProducto(int productid, DateTime fechaInicio, DateTime fechaLimite)
@@ -154,5 +155,75 @@ namespace WebAPINwind.Controllers
                     Cantidad = x.Sum(a => a.Cantidad)
                 });
         }
+
+        [HttpGet]
+        [Route("TopTrimestre")]
+        public IEnumerable<Object> TopTrimestre(int fecha)
+        {
+            return _context.Movements
+                .Where(m => (m.CompanyId == 1) && (m.Type == "VENTA") && (m.Date >= new DateTime(fecha, 01, 01, 0, 0, 0) && m.Date <= new DateTime(fecha, 12, 31, 0, 0, 0)))
+                .Join(_context.Movementdetails,
+                    m => m.MovementId,
+                    md => md.MovementId,
+                    (m, md) => new
+                    {
+                        MovementId = m.MovementId,
+                        ProductId = md.ProductId,
+                        Fecha = m.Date,
+                        Tipo = m.Type,
+                        Cantidad = md.Quantity
+                    })
+                .Join(_context.Products,
+                    mmd => mmd.ProductId,
+                    p => p.ProductId,
+                    (mmd, p) => new
+                    {
+                        mmd.ProductId,
+                        p.ProductName,
+                        mmd.MovementId,
+                        mmd.Fecha,
+                        mmd.Cantidad
+                    })
+                .GroupBy(x => new {x.Fecha, x.ProductId })
+                .Select(x => new
+                {
+                    Nombre = x.Select(a => a.ProductName).First(),
+                    Cantidad = x.Sum(a => a.Cantidad)
+                })
+                .OrderByDescending(x => x.Cantidad).Take(5);
+        }
+
+        /*[HttpGet]
+        [Route("TopProducto")]
+        public IEnumerable<Object> TopProducto()
+        {
+            var Query = (from m in _context.Movements
+                         join md in _context.Movementdetails on m.MovementId equals md.MovementId
+                         join p in _context.Products on md.ProductId equals p.ProductId
+                         where m.CompanyId == 1 && m.Type == "VENTA" && (m.Date).Year == 1997
+                         select new {
+                             id = p.ProductId,
+                             nombre = p.ProductName,
+                             fecha = m.Date,
+                             Ventas = (from md in _context.Movementdetails
+                                       where md.ProductId == p.ProductId
+                                       orderby md.Quantity descending
+                                       select md.Quantity).Sum()
+                         }).OrderBy(x => x.fecha).ThenByDescending(x => x.Ventas).GroupBy(x => new {x.fecha.Month, x.id});
+
+                /*var products = Query.ToList();
+                List<Object> result = new List<Object>();
+
+                int cons = 0;
+                foreach (var product in products){
+                    if(cons < 5){
+                    result.Add(product);
+                    cons++;
+                    }
+                }
+
+            return Query;
+        }*/
     }
 }
+
