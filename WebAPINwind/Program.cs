@@ -22,7 +22,7 @@ builder.Services.AddCors(options => {
     options.AddDefaultPolicy(
         policy => {
             policy.WithOrigins("http://127.0.0.1:5500", 
-                "http://192.168.159.155:8080", "http://localhost");
+                "http://192.168.159.155:8080", "http://localhost", "http://127.0.0.1:5502");
         });
 });
 

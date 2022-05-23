@@ -20,10 +20,10 @@ namespace WebAPINwind.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Movement>>> GetMovements()
         {
-          if (_context.Movements == null)
-          {
-              return NotFound();
-          }
+            if (_context.Movements == null)
+            {
+                return NotFound();
+            }
             return await _context.Movements.ToListAsync();
         }
 
@@ -31,10 +31,10 @@ namespace WebAPINwind.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Movement>> GetMovement(int id)
         {
-          if (_context.Movements == null)
-          {
-              return NotFound();
-          }
+            if (_context.Movements == null)
+            {
+                return NotFound();
+            }
             var movement = await _context.Movements.FindAsync(id);
 
             if (movement == null)
@@ -81,10 +81,10 @@ namespace WebAPINwind.Controllers
         [HttpPost]
         public async Task<ActionResult<Movement>> PostMovement(Movement movement)
         {
-          if (_context.Movements == null)
-          {
-              return Problem("Entity set 'NorthwindContext.Movements'  is null.");
-          }
+            if (_context.Movements == null)
+            {
+                return Problem("Entity set 'NorthwindContext.Movements'  is null.");
+            }
             _context.Movements.Add(movement);
             await _context.SaveChangesAsync();
 
@@ -114,6 +114,45 @@ namespace WebAPINwind.Controllers
         private bool MovementExists(int id)
         {
             return (_context.Movements?.Any(e => e.MovementId == id)).GetValueOrDefault();
+        }
+
+        [HttpGet]
+        [Route("comportamientoproducto")]
+        public IEnumerable<Object> comportamientoProducto(int productid, DateTime fechaInicio, DateTime fechaLimite)
+        {
+            return _context.Movements
+                .Where(m => (m.CompanyId == 1) && (m.Type == "VENTA") && (m.Date >= fechaInicio && m.Date <= fechaLimite))
+                .Join(_context.Movementdetails,
+                    m => m.MovementId,
+                    md => md.MovementId,
+                    (m, md) => new
+                    {
+                        MovementId = m.MovementId,
+                        ProductId = md.ProductId,
+                        Fecha = m.Date,
+                        Tipo = m.Type,
+                        Cantidad = md.Quantity
+                    })
+                .Join(_context.Products,
+                    mmd => mmd.ProductId,
+                    p => p.ProductId,
+                    (mmd, p) => new
+                    {
+                        mmd.ProductId,
+                        p.ProductName,
+                        mmd.MovementId,
+                        mmd.Fecha,
+                        mmd.Cantidad
+                    })
+                .Where(x => x.ProductId == productid)
+                .GroupBy(x => new { x.Fecha.Month, x.Fecha.Year })
+                .Select(x => new
+                {
+                    Nombre = x.Select(a => a.ProductName).First(),
+                    Mes = x.Select(a => a.Fecha.Month).First(),
+                    Año = x.Select(a => a.Fecha.Year).First(),
+                    Cantidad = x.Sum(a => a.Cantidad)
+                });
         }
     }
 }

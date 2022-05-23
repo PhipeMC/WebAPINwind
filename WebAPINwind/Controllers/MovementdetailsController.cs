@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using WebAPINwind.Data;
 using WebAPINwind.Models;
 
@@ -130,34 +131,43 @@ namespace WebAPINwind.Controllers
             return (_context.Movementdetails?.Any(e => e.MovementId == id)).GetValueOrDefault();
         }
 
-        
+
         [HttpGet]
         [Route("top5")]
         public IEnumerable<Object> CategoryProductTop() {
-            IEnumerable<Object> list = _context.Movementdetails).Join(_context.Products,
-                    md2 => md2.ProductId, pr2 => pr2.ProductId, (md2, pr2) => new
-                    {
-                        md2,
-                        pr2
-                    }).Where(mmd => mmd.md2.ProductId == e.pr.p.ProductId);
-            IEnumerable<Object> products =
-                _context.Movementdetails
-                .Join(_context.Products, md => md.ProductId, p => p.ProductId, (md, p) => new {
-                    md,p
-                })
-                .Join(_context.Categories, pr => pr.p.CategoryId, c => c.CategoryId, (pr,c) => new { 
-                    pr,c
-                }).Select(e => new { 
-                    e.pr.p.ProductName,
-                    e.c.CategoryName,
-                    
-                })
-                ;
+            var Query = (from md in _context.Movementdetails
+                         join p in _context.Products on md.ProductId equals p.ProductId
+                         join c in _context.Categories on p.CategoryId equals c.CategoryId
+                         where p.CompanyId == 1
+                         select new
+                         {
+                             Product = p.ProductName,
+                             Category = c.CategoryName,
+                             Quantity1 = (from md in _context.Movementdetails
+                                          where md.ProductId == p.ProductId
+                                          orderby md.Quantity descending
+                                          select md.Quantity).Sum()
+                         }).Distinct().OrderBy(x => x.Category).ThenByDescending(x => x.Quantity1);
 
-            IEnumerable<Object> products2 = new List<Object>();
+            var products = Query.ToList();
+            List<Object> result = new List<Object>();
 
+            String category = "";
+            int cont = 0;
+            foreach (var product in products) {
+                if (product.Category != category) {
+                    category = product.Category;
+                    result.Add(product);
+                    cont = 1;
+                    continue;
+                }
+                if (cont < 5) {
+                    result.Add(product);
+                    cont++;
+                }
+            }
 
-            return products;
+            return result;
         }
     }
 }

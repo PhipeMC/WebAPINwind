@@ -9716,24 +9716,25 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.4",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.4",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.3",
+      "Newtonsoft.Json >= 13.0.1",
       "Pomelo.EntityFrameworkCore.MySql >= 6.0.1",
       "Swashbuckle.AspNetCore >= 6.3.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mine1\\.nuget\\packages\\": {}
+    "C:\\Users\\PhipeMC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mine1\\source\\repos\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj",
+      "projectUniqueName": "C:\\Users\\PhipeMC\\Documents\\Octavo Semestre\\PW III\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj",
       "projectName": "WebAPINwind",
-      "projectPath": "C:\\Users\\mine1\\source\\repos\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj",
-      "packagesPath": "C:\\Users\\mine1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mine1\\source\\repos\\WebAPINwind\\WebAPINwind\\obj\\",
+      "projectPath": "C:\\Users\\PhipeMC\\Documents\\Octavo Semestre\\PW III\\WebAPINwind\\WebAPINwind\\WebAPINwind.csproj",
+      "packagesPath": "C:\\Users\\PhipeMC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PhipeMC\\Documents\\Octavo Semestre\\PW III\\WebAPINwind\\WebAPINwind\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mine1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PhipeMC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9782,6 +9783,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[6.0.3, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.1, )"
           },
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
